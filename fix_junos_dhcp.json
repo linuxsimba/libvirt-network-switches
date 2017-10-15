@@ -1,0 +1,28 @@
+{
+  "builders": [
+    {
+      "boot_wait": "60s",
+      "source_path": "box.ovf",
+      "boot_command": [
+        "root<enter><wait5>",
+        "Juniper<enter><wait>",
+        "cli<enter><wait>",
+        "show dhcp client binding<enter><wait>",
+        "clear dhcp client binding all<enter><wait>",
+        "show dhcp client binding<enter><wait>",
+        "exit<enter><wait>",
+        "./shutdown.sh<enter><wait10><wait10><wait10><wait10><wait10><wait10>"
+      ],
+      "type": "virtualbox-ovf",
+      "communicator": "none",
+      "guest_additions_mode": "disable",
+      "virtualbox_version_file": ""
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "boxes/junos_dhcp_fixed.box",
+      "type": "vagrant"
+    }
+  ]
+}
